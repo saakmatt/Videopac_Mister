@@ -92,8 +92,6 @@ architecture rtl of i8244_sync_gen is
   constant last_hsync_c      : pos_t := first_hsync_c + to_pos_f(34-1);
   constant first_bg_c        : pos_t := first_hblank_c + to_pos_f(48);
   constant last_bg_c         : pos_t := first_bg_c + to_pos_f(18-1);
-  
-  constant hblank_start_c    : pos_t := to_pos_f(320);
 
   -- constant last_hpos_c       : pos_t := to_pos_f(455);
   -- constant last_hblank_c     : pos_t := to_pos_f(455); -- 455 -- 87 total
@@ -182,8 +180,8 @@ begin
         -- horizontal position counter ----------------------------------------
         vinc_v   := false;
         if    vbl_sync_v then
-          -- sync to pixel 1? in new line - lets try 0 to fix that artifact
-          hpos_q <= to_pos_f(0);
+          -- sync to pixel 1
+          hpos_q <= to_pos_f(1);
         else
           if hpos_q = last_hpos_c then
             hpos_q <= to_pos_f(0);
