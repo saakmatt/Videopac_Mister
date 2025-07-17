@@ -522,7 +522,7 @@ vp_console vp
 	.l_o            (luma),
 	.hsync_n_o      (HSync),
 	.vsync_n_o      (VSync),
-	.hbl_o          (HBlank),
+	.hblank_o          (HBlank),
 	.vbl_o          (VBlank),
 
 	// Sound
@@ -627,6 +627,7 @@ wire VBlank;
 wire HBlank;
 wire [7:0] video;
 wire ce_pix_out; 
+wire freeze_sync;
 
 wire ce_pix = clk_vdc_en;
 
@@ -673,17 +674,17 @@ video_mixer #(.LINE_LENGTH(455)) video_mixer
 (
 
    .*,
-	.clk_vid(clk_sys),
+	//.clk_vid(clk_sys),
 	.HBlank(HBlank),
 	.VBlank(VBlank),
 	.HSync(HSync),
 	.VSync(VSync),
-	.ce_pix(ce_pix),
+	//.ce_pix(ce_pix),
 
 	.scandoubler(scale || forced_scandoubler),
-	.scanlines(0),
+	//.scanlines(0),
 	.hq2x(scale==1),
-	.mono(0),
+	//.mono(0),
 
 	.R(G7200 ? grayscale : Rx),
    .G(G7200 ? grayscale : Gx),
@@ -692,7 +693,7 @@ video_mixer #(.LINE_LENGTH(455)) video_mixer
 );
 
 assign CLK_VIDEO = clk_sys;
-assign CE_PIXEL = ce_pix;
+//assign CE_PIXEL = ce_pix;
 
 ////////////////////////////  INPUT  ////////////////////////////////////
 
